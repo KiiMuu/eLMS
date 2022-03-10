@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { signup } from 'state/auth/authApi';
+import { useAppDispatch, useAppSelector } from 'state/hooks';
+import { User } from 'interfaces/auth';
 import { AuthWrapper } from 'styles/Auth';
 import {
 	Container,
@@ -26,8 +29,11 @@ const Signup = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
+	let [user, setUser] = useState<User | null>(null);
 	const md = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-	let errors: any[] = [];
+
+	const dispatch = useAppDispatch();
+	const { signupStatus, signupErrors } = useAppSelector(state => state.auth);
 
 	const handleClickShowPassword = () => {
 		setShowPassword(prev => !prev);
@@ -37,15 +43,27 @@ const Signup = () => {
 		e.preventDefault();
 	};
 
-	const handleSignUpProcess = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		try {
-			console.table({ name, email, password });
-		} catch (err) {
-			console.log('error', err);
+			let res = await dispatch(
+				signup({ name, email, password })
+			).unwrap();
+
+			setUser(res);
+		} catch (error) {
+			console.log('error', error);
 		}
 	};
+
+	useEffect(() => {
+		if (typeof window !== undefined) {
+			window.localStorage.setItem('elmsUser', JSON.stringify(user));
+		}
+	}, [user]);
+
+	console.log({ user, signupStatus, signupErrors });
 
 	return (
 		<AuthWrapper>
@@ -74,7 +92,7 @@ const Signup = () => {
 					</div>
 				</Grid>
 				<Grid item xs={12} sm={6} md={4}>
-					<form onSubmit={handleSignUpProcess} className='form'>
+					<form onSubmit={handleSignUp} className='form'>
 						<Container maxWidth='xl'>
 							<div className='formContent'>
 								<Typography
@@ -112,13 +130,14 @@ const Signup = () => {
 									</InputLabel>
 
 									<OutlinedInput
-										error={
-											errors.find(
-												e => e.param === 'password'
-											)
-												? true
-												: false
-										}
+										// error={
+										// 	signupErrors?.find(
+										// 		(e: any) =>
+										// 			e.param === 'password'
+										// 	)
+										// 		? true
+										// 		: false
+										// }
 										id='password'
 										label='Password'
 										placeholder='Type your password'
@@ -152,21 +171,22 @@ const Signup = () => {
 											) : null
 										}
 									/>
-									<FormHelperText
+									{/* <FormHelperText
 										error={
-											errors.find(
-												e => e.param === 'password'
+											signupErrors?.find(
+												(e: any) =>
+													e.param === 'password'
 											)
 												? true
 												: false
 										}
 									>
-										{errors.map(e =>
+										{signupErrors?.map((e: any) =>
 											e.param === 'password'
 												? e.msg
 												: null
 										)}
-									</FormHelperText>
+									</FormHelperText> */}
 								</FormControl>
 								<Stack
 									direction='row'

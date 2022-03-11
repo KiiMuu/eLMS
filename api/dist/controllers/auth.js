@@ -11,9 +11,11 @@ const signup = async (req, res) => {
         const { name, email, password } = req.body;
         let isUserExist = await User_1.default.findOne({ email }).exec();
         if (isUserExist) {
-            return res.status(400).json({
-                msg: 'That user with this email already exists.',
-            });
+            return res.status(400).json([
+                {
+                    msg: 'That user with this email already exists.',
+                },
+            ]);
         }
         let hashedPassword = await (0, auth_1.hashPassword)(password);
         let user = await new User_1.default({

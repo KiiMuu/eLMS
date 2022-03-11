@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { signup } from 'state/auth/authApi';
 import { useAppDispatch, useAppSelector } from 'state/hooks';
-import { User } from 'interfaces/auth';
+import { IErrorData, User } from 'interfaces/auth';
+import AlertMessage from 'components/alerts/AlertMessage';
+import useSnackBar from 'hooks/useSnackbar';
 import { AuthWrapper } from 'styles/Auth';
 import {
 	Container,
@@ -30,10 +33,13 @@ const Signup = () => {
 	const [password, setPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
 	let [user, setUser] = useState<User | null>(null);
-	const md = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 
 	const dispatch = useAppDispatch();
 	const { signupStatus, signupErrors } = useAppSelector(state => state.auth);
+	const md = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+	const { openSnackbar, handleCloseSnackbar, setOpenSnackbar } =
+		useSnackBar();
+	const router = useRouter();
 
 	const handleClickShowPassword = () => {
 		setShowPassword(prev => !prev);
@@ -53,7 +59,8 @@ const Signup = () => {
 
 			setUser(res);
 		} catch (error) {
-			console.log('error', error);
+			setOpenSnackbar(true);
+			console.log('ERROR!', error);
 		}
 	};
 
@@ -61,9 +68,11 @@ const Signup = () => {
 		if (typeof window !== undefined) {
 			window.localStorage.setItem('elmsUser', JSON.stringify(user));
 		}
-	}, [user]);
 
-	console.log({ user, signupStatus, signupErrors });
+		if (signupStatus === 'succeeded') {
+			router.push('/');
+		}
+	}, [user]);
 
 	return (
 		<AuthWrapper>
@@ -71,6 +80,19 @@ const Signup = () => {
 				<title>Sign Up | eLMS</title>
 				<meta name='description' content='Sign Up | eLMS' />
 			</Head>
+			{signupErrors?.map((error: IErrorData, i: number) =>
+				!error.param ? (
+					<AlertMessage
+						key={i}
+						openSnackbar={openSnackbar}
+						handleCloseSnackbar={handleCloseSnackbar}
+						autoHideDuration={5000}
+						isCustomized={true}
+						severity='error'
+						customizedMsg={error.msg}
+					/>
+				) : null
+			)}
 			<Grid container spacing={[0]}>
 				<Grid item xs={12} sm={6} md={8}>
 					<div className='heading'>
@@ -113,6 +135,20 @@ const Signup = () => {
 										placeholder='Type your name'
 										value={name}
 										onChange={e => setName(e.target.value)}
+										error={
+											signupErrors?.find(
+												(e: IErrorData) =>
+													e.param === 'name'
+											)
+												? true
+												: false
+										}
+										helperText={signupErrors?.map(
+											(e: IErrorData) =>
+												e.param === 'name'
+													? e.msg
+													: null
+										)}
 									/>
 								</FormControl>
 								<FormControl sx={{ mt: 2 }} fullWidth>
@@ -122,22 +158,36 @@ const Signup = () => {
 										placeholder='Type your email'
 										value={email}
 										onChange={e => setEmail(e.target.value)}
+										error={
+											signupErrors?.find(
+												(e: IErrorData) =>
+													e.param === 'email' ||
+													!e.param
+											)
+												? true
+												: false
+										}
+										helperText={signupErrors?.map(
+											(e: IErrorData) =>
+												e.param === 'email'
+													? e.msg
+													: null
+										)}
 									/>
 								</FormControl>
 								<FormControl sx={{ mt: 2 }} fullWidth>
 									<InputLabel htmlFor='password'>
 										Password
 									</InputLabel>
-
 									<OutlinedInput
-										// error={
-										// 	signupErrors?.find(
-										// 		(e: any) =>
-										// 			e.param === 'password'
-										// 	)
-										// 		? true
-										// 		: false
-										// }
+										error={
+											signupErrors?.find(
+												(e: IErrorData) =>
+													e.param === 'password'
+											)
+												? true
+												: false
+										}
 										id='password'
 										label='Password'
 										placeholder='Type your password'
@@ -171,22 +221,22 @@ const Signup = () => {
 											) : null
 										}
 									/>
-									{/* <FormHelperText
+									<FormHelperText
 										error={
 											signupErrors?.find(
-												(e: any) =>
+												(e: IErrorData) =>
 													e.param === 'password'
 											)
 												? true
 												: false
 										}
 									>
-										{signupErrors?.map((e: any) =>
+										{signupErrors?.map((e: IErrorData) =>
 											e.param === 'password'
 												? e.msg
 												: null
 										)}
-									</FormHelperText> */}
+									</FormHelperText>
 								</FormControl>
 								<Stack
 									direction='row'
@@ -198,7 +248,7 @@ const Signup = () => {
 									spacing={2}
 								>
 									<LoadingButton
-										loading={false}
+										loading={signupStatus === 'loading'}
 										variant='contained'
 										disableElevation
 										type='submit'

@@ -12,9 +12,11 @@ const signup = async (
 		let isUserExist = await User.findOne({ email }).exec();
 
 		if (isUserExist) {
-			return res.status(400).json({
-				msg: 'That user with this email already exists.',
-			});
+			return res.status(400).json([
+				{
+					msg: 'That user with this email already exists.',
+				},
+			]);
 		}
 
 		let hashedPassword = await hashPassword(password);

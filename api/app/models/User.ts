@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { IUserModel } from '../interfaces/user';
+import { IUserModel } from '../interfaces/auth';
 
 const userSchema: Schema = new Schema<IUserModel>(
 	{
@@ -25,8 +25,8 @@ const userSchema: Schema = new Schema<IUserModel>(
 			default: '/avatar.png',
 		},
 		role: {
-			type: [String],
-			default: ['subscriber'],
+			type: String,
+			default: 'subscriber',
 			enum: ['subscriber', 'instructor', 'admin'],
 		},
 		stripe_account_id: '',

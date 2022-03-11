@@ -44,10 +44,6 @@ app.use((0, cors_1.default)());
 app.use((0, morgan_1.default)('dev'));
 app.use((0, helmet_1.default)());
 app.use((0, compression_1.default)());
-app.use((req, res, next) => {
-    console.log('Handle your own middleware here!');
-    next();
-});
 // routes
 fs_1.default.readdirSync('app/routes').map((route) => {
     Promise.resolve().then(() => __importStar(require(`./routes/${route}`))).then(r => {

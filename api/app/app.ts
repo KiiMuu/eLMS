@@ -19,10 +19,6 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(compression());
-app.use((req, res, next) => {
-	console.log('Handle your own middleware here!');
-	next();
-});
 
 // routes
 fs.readdirSync('app/routes').map((route: string) => {

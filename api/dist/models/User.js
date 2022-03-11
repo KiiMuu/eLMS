@@ -24,8 +24,8 @@ const userSchema = new mongoose_1.Schema({
         default: '/avatar.png',
     },
     role: {
-        type: [String],
-        default: ['subscriber'],
+        type: String,
+        default: 'subscriber',
         enum: ['subscriber', 'instructor', 'admin'],
     },
     stripe_account_id: '',

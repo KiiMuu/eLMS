@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import { AuthWrapper } from 'styles/Auth';
@@ -26,6 +27,7 @@ const Signin = () => {
 	const [password, setPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
 	const md = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+	const router = useRouter();
 	let errors: any[] = [];
 
 	const handleClickShowPassword = () => {
@@ -47,7 +49,7 @@ const Signin = () => {
 	};
 
 	return (
-		<AuthWrapper>
+		<AuthWrapper route={router.route === '/signup' ? 'signup' : 'signin'}>
 			<Head>
 				<title>Sign In | eLMS</title>
 				<meta name='description' content='Sign In | eLMS' />

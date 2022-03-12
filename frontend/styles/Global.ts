@@ -2,8 +2,8 @@ import { globalCss } from '@stitches/react';
 
 const GlobalCSS = globalCss({
 	':root': {
-		'--mainColor': '#F71E35',
-		'--secondaryColor': '#1794A5',
+		'--mainColor': '#2ecc71',
+		'--secondaryColor': '#34495e',
 		'--br': '3px', // border-radius
 		'--borderColor': '#f0ebeb',
 		'--textGray': 'rgb(91, 112, 131)',

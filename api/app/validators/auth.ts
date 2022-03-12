@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import isEmail from '../utils/isEmail';
 import { IErrorData } from '../interfaces/auth';
 
-export const areValidSignupInputs = (
+export const areValidAuthInputs = (
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -11,7 +11,7 @@ export const areValidSignupInputs = (
 
 	let errors: IErrorData[] = [];
 
-	if (!name || name.length < 2) {
+	if (req.originalUrl === '/api/auth/signup' && (!name || name.length < 2)) {
 		errors.push({
 			param: 'name',
 			msg: 'Name must be provided and at least 2 characters long.',

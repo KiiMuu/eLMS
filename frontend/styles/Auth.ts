@@ -21,7 +21,7 @@ export const AuthWrapper = styled('section', alignItemsVerticallyHorizontally, {
 	'& .form': {
 		height: '100vh',
 		backgroundImage:
-			'linear-gradient(to right, rgba(255, 255, 255, 0.91), rgba(255, 255, 255, 0.88))',
+			'linear-gradient(to right, rgba(255, 255, 255, 0.81), rgba(255, 255, 255, 0.78))',
 		'& .formContent': {
 			padding: '50px 10px 10px 10px',
 		},

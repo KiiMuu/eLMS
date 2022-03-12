@@ -3,12 +3,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.areValidSignupInputs = void 0;
+exports.areValidAuthInputs = void 0;
 const isEmail_1 = __importDefault(require("../utils/isEmail"));
-const areValidSignupInputs = (req, res, next) => {
+const areValidAuthInputs = (req, res, next) => {
     const { name, email, password } = req.body;
     let errors = [];
-    if (!name || name.length < 2) {
+    if (req.originalUrl === '/api/auth/signup' && (!name || name.length < 2)) {
         errors.push({
             param: 'name',
             msg: 'Name must be provided and at least 2 characters long.',
@@ -34,4 +34,4 @@ const areValidSignupInputs = (req, res, next) => {
     }
     next();
 };
-exports.areValidSignupInputs = areValidSignupInputs;
+exports.areValidAuthInputs = areValidAuthInputs;

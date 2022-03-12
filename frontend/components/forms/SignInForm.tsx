@@ -15,15 +15,13 @@ import {
 import { LoadingButton } from '@mui/lab';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-const SignUpForm: React.FC<IAuthForm> = ({
-	name,
-	setName,
+const SignInForm: React.FC<IAuthForm> = ({
 	email,
 	setEmail,
 	password,
 	setPassword,
-	signupErrors,
-	signupStatus,
+	signinErrors,
+	signinStatus,
 	showPassword,
 	handleMouseDownPassword,
 	handleClickShowPassword,
@@ -36,30 +34,11 @@ const SignUpForm: React.FC<IAuthForm> = ({
 				color='primary'
 				gutterBottom
 			>
-				Sign Up, Now!
+				Sign In
 			</Typography>
 			<Typography variant='subtitle2' gutterBottom>
-				Create a new account, and start your journey.
+				Provide your valid credentials to take you up!.
 			</Typography>
-			<FormControl sx={{ mt: 2 }} fullWidth>
-				<TextField
-					label='Name'
-					variant='outlined'
-					placeholder='Type your name'
-					value={name}
-					onChange={e => setName(e.target.value)}
-					error={
-						signupErrors?.find(
-							(e: IErrorData) => e.param === 'name'
-						)
-							? true
-							: false
-					}
-					helperText={signupErrors?.map((e: IErrorData) =>
-						e.param === 'name' ? e.msg : null
-					)}
-				/>
-			</FormControl>
 			<FormControl sx={{ mt: 2 }} fullWidth>
 				<TextField
 					label='Email'
@@ -68,13 +47,13 @@ const SignUpForm: React.FC<IAuthForm> = ({
 					value={email}
 					onChange={e => setEmail(e.target.value)}
 					error={
-						signupErrors?.find(
+						signinErrors?.find(
 							(e: IErrorData) => e.param === 'email' || !e.param
 						)
 							? true
 							: false
 					}
-					helperText={signupErrors?.map((e: IErrorData) =>
+					helperText={signinErrors?.map((e: IErrorData) =>
 						e.param === 'email' ? e.msg : null
 					)}
 				/>
@@ -94,7 +73,7 @@ const SignUpForm: React.FC<IAuthForm> = ({
 				</InputLabel>
 				<OutlinedInput
 					error={
-						signupErrors?.find(
+						signinErrors?.find(
 							(e: IErrorData) => e.param === 'password'
 						)
 							? true
@@ -127,14 +106,14 @@ const SignUpForm: React.FC<IAuthForm> = ({
 				/>
 				<FormHelperText
 					error={
-						signupErrors?.find(
+						signinErrors?.find(
 							(e: IErrorData) => e.param === 'password'
 						)
 							? true
 							: false
 					}
 				>
-					{signupErrors?.map((e: IErrorData) =>
+					{signinErrors?.map((e: IErrorData) =>
 						e.param === 'password' ? e.msg : null
 					)}
 				</FormHelperText>
@@ -149,20 +128,20 @@ const SignUpForm: React.FC<IAuthForm> = ({
 				spacing={2}
 			>
 				<LoadingButton
-					loading={signupStatus === 'loading'}
+					loading={signinStatus === 'loading'}
 					variant='contained'
 					disableElevation
 					type='submit'
 				>
-					Sign Up
+					Sign In
 				</LoadingButton>
-				<Link href='/signin'>
+				<Link href='/signup'>
 					<Button
 						disableElevation
 						color='secondary'
 						sx={{ textTransform: 'unset' }}
 					>
-						Already registered? Sign in
+						Haven't an account? Sign up
 					</Button>
 				</Link>
 			</Stack>
@@ -183,4 +162,4 @@ const SignUpForm: React.FC<IAuthForm> = ({
 	);
 };
 
-export default SignUpForm;
+export default SignInForm;

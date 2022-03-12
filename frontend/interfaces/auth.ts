@@ -1,5 +1,5 @@
-export interface signupData {
-	name: string;
+export interface IAuthData {
+	name?: string;
 	email: string;
 	password: string;
 }
@@ -16,15 +16,17 @@ export interface IErrorData {
 	msg: string;
 }
 
-export interface ISignUpForm {
+export interface IAuthForm {
 	name: string;
 	setName: (e: string) => void;
 	email: string;
 	setEmail: (e: string) => void;
 	password: string;
 	setPassword: (e: string) => void;
-	signupErrors: IErrorData[];
-	signupStatus: string;
+	signupErrors?: IErrorData[];
+	signinErrors?: IErrorData[];
+	signupStatus?: string;
+	signinStatus?: string;
 	showPassword: boolean;
 	handleMouseDownPassword: (e: React.MouseEvent<HTMLElement>) => void;
 	handleClickShowPassword: () => void;

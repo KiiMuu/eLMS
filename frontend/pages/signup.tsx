@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { signup } from 'state/auth/authApi';
 import { useAppDispatch, useAppSelector } from 'state/hooks';
@@ -16,7 +17,6 @@ import {
 	Theme,
 	Button,
 } from '@mui/material';
-import Link from 'next/link';
 
 const Signup = () => {
 	const [name, setName] = useState('');

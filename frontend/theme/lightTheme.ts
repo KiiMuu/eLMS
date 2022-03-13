@@ -28,7 +28,7 @@ const lightTheme = createTheme({
 		MuiAppBar: {
 			styleOverrides: {
 				root: {
-					boxShadow: 'none',
+					boxShadow: '1px 2px 3px rgb(0 0 0 / 13%)',
 				},
 			},
 		},

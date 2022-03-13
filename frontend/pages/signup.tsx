@@ -59,14 +59,11 @@ const Signup = () => {
 	};
 
 	useEffect(() => {
-		if (typeof window !== undefined) {
-			window.localStorage.setItem('elmsUser', JSON.stringify(user));
-		}
-
 		if (signupStatus === 'succeeded') {
+			window.localStorage.setItem('elmsUser', JSON.stringify(user));
 			router.push('/');
 		}
-	}, [user]);
+	}, [user, router, signupStatus]);
 
 	return (
 		<AuthWrapper route={router.route === '/signup' ? 'signup' : 'signin'}>
@@ -97,12 +94,12 @@ const Signup = () => {
 									fontWeight='bold'
 									color='primary'
 								>
-									Online Courses
+									Online Education Marketplace
 								</Typography>
 								<Typography variant='h5' fontWeight='bold'>
 									Learn anything, On your schedule @ eLMS
 								</Typography>
-								<Link href='/courses'>
+								<Link href='/courses' passHref>
 									<Button
 										size='large'
 										color='primary'

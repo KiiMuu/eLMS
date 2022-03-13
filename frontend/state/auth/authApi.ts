@@ -48,3 +48,20 @@ export const signin = createAsyncThunk(
 		}
 	}
 );
+
+export const signout = createAsyncThunk(
+	'auth/signout',
+	async ({}, { rejectWithValue }) => {
+		try {
+			const { data } = await axios.get(
+				`${process.env.NEXT_PUBLIC_API}/auth/signout`
+			);
+
+			return data;
+		} catch (error: any) {
+			return rejectWithValue(
+				error.response ? error.response.data : error
+			);
+		}
+	}
+);

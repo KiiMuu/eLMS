@@ -29,7 +29,9 @@ class MyDocument extends Document {
 				<link
 					href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap'
 					rel='stylesheet'
+					data-optimized-fonts='true'
 				/>
+				<style data-href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap' />
 				<style
 					id='stitches'
 					dangerouslySetInnerHTML={{ __html: getCssText() }}

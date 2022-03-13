@@ -87,4 +87,16 @@ const signin = async (
 	}
 };
 
-export { signup, signin };
+const signout = async (req: Request, res: Response): Promise<object> => {
+	try {
+		res.clearCookie('elmsToken');
+
+		return res.json({ msg: 'Signed out success.' });
+	} catch (error: any) {
+		return res.status(400).json({
+			msg: error.message,
+		});
+	}
+};
+
+export { signup, signin, signout };

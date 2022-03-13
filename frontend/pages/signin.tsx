@@ -57,14 +57,11 @@ const Signin = () => {
 	};
 
 	useEffect(() => {
-		if (typeof window !== undefined) {
-			window.localStorage.setItem('elmsUser', JSON.stringify(user));
-		}
-
 		if (signinStatus === 'succeeded') {
+			window.localStorage.setItem('elmsUser', JSON.stringify(user));
 			router.push('/');
 		}
-	}, [user]);
+	}, [user, router, signinStatus]);
 
 	return (
 		<AuthWrapper route={router.route === '/signup' ? 'signup' : 'signin'}>
@@ -100,7 +97,7 @@ const Signin = () => {
 								<Typography variant='h5' fontWeight='bold'>
 									Continue your learning process @ eLMS.
 								</Typography>
-								<Link href='/courses'>
+								<Link href='/courses' passHref>
 									<Button
 										size='large'
 										color='primary'

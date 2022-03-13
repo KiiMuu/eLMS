@@ -83,7 +83,7 @@ const SignUpForm: React.FC<IAuthForm> = ({
 				<InputLabel
 					htmlFor='password'
 					error={
-						signinErrors?.find(
+						signupErrors?.find(
 							(e: IErrorData) => e.param === 'password'
 						)
 							? true
@@ -156,7 +156,7 @@ const SignUpForm: React.FC<IAuthForm> = ({
 				>
 					Sign Up
 				</LoadingButton>
-				<Link href='/signin'>
+				<Link href='/signin' passHref>
 					<Button
 						disableElevation
 						color='secondary'
@@ -166,7 +166,7 @@ const SignUpForm: React.FC<IAuthForm> = ({
 					</Button>
 				</Link>
 			</Stack>
-			<Link href='/password/reset'>
+			<Link href='/password/reset' passHref>
 				<Button
 					disableElevation
 					sx={{

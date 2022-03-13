@@ -1,20 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from 'interfaces/auth';
-import { signup, signin } from './authApi';
+import { signup, signin, signout } from './authApi';
 
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
-		signupStatus: 'idle' as string,
-		signinStatus: 'idle' as string,
+		signupStatus: 'idle',
+		signinStatus: 'idle',
+		signoutStatus: 'idle',
 		signupErrors: [] as any,
 		signinErrors: [] as any,
+		signoutErrors: [] as any,
+		signoutSuccessAlert: '',
 		user: null as User | null,
 	},
 	reducers: {
-		onSignOut: state => {
-			state.user = null;
-		},
+		// onSignOut: state => {
+		// 	state.user = null;
+		// },
 	},
 	extraReducers(builder) {
 		builder
@@ -39,10 +42,22 @@ export const authSlice = createSlice({
 			.addCase(signin.rejected, (state, action) => {
 				state.signinStatus = 'failed';
 				state.signinErrors = action.payload;
+			})
+			.addCase(signout.pending, (state, action) => {
+				state.signoutStatus = 'loading';
+			})
+			.addCase(signout.fulfilled, (state, action) => {
+				state.signoutStatus = 'succeeded';
+				state.user = null;
+				state.signoutSuccessAlert = action.payload.msg;
+			})
+			.addCase(signout.rejected, (state, action) => {
+				state.signoutStatus = 'failed';
+				state.signoutErrors = action.payload;
 			});
 	},
 });
 
-export const { onSignOut } = authSlice.actions;
+// export const { onSignOut } = authSlice.actions;
 
 export default authSlice.reducer;

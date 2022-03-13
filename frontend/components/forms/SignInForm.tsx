@@ -135,17 +135,17 @@ const SignInForm: React.FC<IAuthForm> = ({
 				>
 					Sign In
 				</LoadingButton>
-				<Link href='/signup'>
+				<Link href='/signup' passHref>
 					<Button
 						disableElevation
 						color='secondary'
 						sx={{ textTransform: 'unset' }}
 					>
-						Haven't an account? Sign up
+						Haven&apos;t an account? Sign up
 					</Button>
 				</Link>
 			</Stack>
-			<Link href='/password/reset'>
+			<Link href='/password/reset' passHref>
 				<Button
 					disableElevation
 					sx={{

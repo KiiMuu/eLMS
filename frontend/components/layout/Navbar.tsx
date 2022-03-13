@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
 	const router = useRouter();
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 	const dispatch = useAppDispatch();
-	const { signoutStatus } = useAppSelector(state => state.auth);
+	const { signoutStatus, user } = useAppSelector(state => state.auth);
 
 	const handleMobileMenuClose = useCallback(() => {
 		setMobileMoreAnchorEl(null);
@@ -38,14 +38,11 @@ const Navbar: React.FC = () => {
 	const handleLogout = useCallback(() => {
 		dispatch(signout());
 		setMobileMoreAnchorEl(null);
+		window.localStorage.removeItem('elmsUser');
+		router.push('/signin');
 	}, [dispatch]);
 
-	useEffect(() => {
-		if (signoutStatus === 'succeeded') {
-			window.localStorage.removeItem('elmsUser');
-			router.push('/signin');
-		}
-	}, [router, signoutStatus]);
+	console.log({ user });
 
 	const renderNavItems = () => (
 		<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -66,56 +63,60 @@ const Navbar: React.FC = () => {
 					</Button>
 				</Link>
 			</MenuItem>
-			<>
-				<MenuItem>
-					<Link href='/signup' passHref>
-						<Button
-							size='small'
-							color='secondary'
-							sx={{
-								display: {
-									xs: 'none',
-									sm: 'block',
-								},
-								textDecoration: 'none',
-							}}
-						>
-							Sign Up
-						</Button>
-					</Link>
+			{!user && (
+				<>
+					<MenuItem>
+						<Link href='/signup' passHref>
+							<Button
+								size='small'
+								color='secondary'
+								sx={{
+									display: {
+										xs: 'none',
+										sm: 'block',
+									},
+									textDecoration: 'none',
+								}}
+							>
+								Sign Up
+							</Button>
+						</Link>
+					</MenuItem>
+					<MenuItem>
+						<Link href='/signin' passHref>
+							<Button
+								size='small'
+								color='secondary'
+								sx={{
+									display: {
+										xs: 'none',
+										sm: 'block',
+									},
+									textDecoration: 'none',
+								}}
+							>
+								Sign In
+							</Button>
+						</Link>
+					</MenuItem>
+				</>
+			)}
+			{user && (
+				<MenuItem onClick={handleLogout}>
+					<Button
+						size='small'
+						color='secondary'
+						sx={{
+							display: {
+								xs: 'none',
+								sm: 'block',
+							},
+						}}
+					>
+						Sign Out
+					</Button>
 				</MenuItem>
-				<MenuItem>
-					<Link href='/signin' passHref>
-						<Button
-							size='small'
-							color='secondary'
-							sx={{
-								display: {
-									xs: 'none',
-									sm: 'block',
-								},
-								textDecoration: 'none',
-							}}
-						>
-							Sign In
-						</Button>
-					</Link>
-				</MenuItem>
-			</>
-			<MenuItem onClick={handleLogout}>
-				<Button
-					size='small'
-					color='secondary'
-					sx={{
-						display: {
-							xs: 'none',
-							sm: 'block',
-						},
-					}}
-				>
-					Sign Out
-				</Button>
-			</MenuItem>
+			)}
 		</Box>
 	);
 
@@ -163,7 +164,7 @@ const Navbar: React.FC = () => {
 				mobileMoreAnchorEl={mobileMoreAnchorEl}
 				isMobileMenuOpen={isMobileMenuOpen}
 				handleMobileMenuClose={handleMobileMenuClose}
-				// userInfo={userInfo}
+				user={user}
 				handleMenuClose={handleMenuClose}
 				handleLogout={handleLogout}
 			/>

@@ -2,6 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 import { User } from 'interfaces/auth';
 import { signup, signin, signout } from './authApi';
 
+let userState;
+if (typeof window !== 'undefined') {
+	if (window.localStorage.getItem('elmsUser')) {
+		userState = JSON.parse(
+			window.localStorage.getItem('elmsUser') as string
+		);
+	} else {
+		userState = null;
+	}
+}
+
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
@@ -12,7 +23,7 @@ export const authSlice = createSlice({
 		signinErrors: [] as any,
 		signoutErrors: [] as any,
 		signoutSuccessAlert: '',
-		user: null as User | null,
+		user: userState as User | null,
 	},
 	reducers: {
 		// onSignOut: state => {

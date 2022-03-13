@@ -16,4 +16,5 @@ export interface IMobileProps {
 	handleMobileMenuClose: () => void;
 	handleMenuClose: () => void;
 	handleLogout: () => void;
+	user: any;
 }

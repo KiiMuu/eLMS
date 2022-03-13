@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import { useEffect, useState, useCallback } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -18,7 +19,7 @@ import {
 	Button,
 } from '@mui/material';
 
-const Signup = () => {
+const Signup: NextPage = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -52,6 +53,7 @@ const Signup = () => {
 			).unwrap();
 
 			setUser(res);
+			router.push('/');
 		} catch (error) {
 			setOpenSnackbar(true);
 			console.log('ERROR!', error);
@@ -61,9 +63,8 @@ const Signup = () => {
 	useEffect(() => {
 		if (signupStatus === 'succeeded') {
 			window.localStorage.setItem('elmsUser', JSON.stringify(user));
-			router.push('/');
 		}
-	}, [user, router, signupStatus]);
+	}, [user, signupStatus]);
 
 	return (
 		<AuthWrapper route={router.route === '/signup' ? 'signup' : 'signin'}>

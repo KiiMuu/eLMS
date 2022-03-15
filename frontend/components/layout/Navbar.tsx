@@ -42,8 +42,6 @@ const Navbar: React.FC = () => {
 		router.push('/signin');
 	}, [dispatch]);
 
-	console.log({ user });
-
 	const renderNavItems = () => (
 		<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 			<MenuItem>

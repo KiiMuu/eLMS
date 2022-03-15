@@ -44,14 +44,17 @@ const Signin: NextPage = () => {
 		[]
 	);
 
-	const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		try {
 			let res = await dispatch(signin({ email, password })).unwrap();
 
 			setUser(res);
-            router.push('/');
+
+			if (signinStatus === 'succeeded') {
+				router.push('/');
+			}
 		} catch (error) {
 			setOpenSnackbar(true);
 			console.log('ERROR!', error);
@@ -114,7 +117,7 @@ const Signin: NextPage = () => {
 					</div>
 				</Grid>
 				<Grid item xs={12} sm={6} md={4}>
-					<form onSubmit={handleSignUp} className='form'>
+					<form onSubmit={handleSignIn} className='form'>
 						<Container maxWidth='xl'>
 							<div className='formContent'>
 								<SignInForm

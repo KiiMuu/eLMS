@@ -87,6 +87,21 @@ const signin = async (
 	}
 };
 
+const getCurrentUser = async (req: Request, res: Response): Promise<object> => {
+	try {
+		// @ts-ignore: Unreachable code error
+		let currentUser = await User.findById(req.user?._id)
+			.select('-password')
+			.exec();
+
+		return res.json(currentUser);
+	} catch (error: any) {
+		return res.status(400).json({
+			msg: error.message,
+		});
+	}
+};
+
 const signout = async (req: Request, res: Response): Promise<object> => {
 	try {
 		res.clearCookie('elmsToken');
@@ -99,4 +114,4 @@ const signout = async (req: Request, res: Response): Promise<object> => {
 	}
 };
 
-export { signup, signin, signout };
+export { signup, signin, getCurrentUser, signout };

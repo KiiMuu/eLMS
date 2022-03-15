@@ -53,7 +53,10 @@ const Signup: NextPage = () => {
 			).unwrap();
 
 			setUser(res);
-			router.push('/');
+
+			if (signupStatus === 'succeeded') {
+				router.push('/');
+			}
 		} catch (error) {
 			setOpenSnackbar(true);
 			console.log('ERROR!', error);
@@ -94,6 +97,7 @@ const Signup: NextPage = () => {
 									variant={md ? 'h3' : 'h1'}
 									fontWeight='bold'
 									color='primary'
+									gutterBottom
 								>
 									Online Education Marketplace
 								</Typography>

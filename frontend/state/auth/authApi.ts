@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IAuthData } from 'interfaces/auth';
+import { headers } from 'next.config';
 
 export const signup = createAsyncThunk(
 	'auth/signup',

@@ -6,7 +6,8 @@
 		"client": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"prepare": "husky install"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.8.1",

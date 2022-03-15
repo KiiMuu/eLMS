@@ -1,3 +1,5 @@
+import { User } from './auth';
+
 export interface IAlertMessage {
 	openSnackbar: boolean;
 	handleCloseSnackbar: any;
@@ -16,5 +18,5 @@ export interface IMobileProps {
 	handleMobileMenuClose: () => void;
 	handleMenuClose: () => void;
 	handleLogout: () => void;
-	user: any;
+	user: User | null;
 }

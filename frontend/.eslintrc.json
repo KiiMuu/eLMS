@@ -1,3 +1,6 @@
 {
-	"extends": ["eslint:recommended", "plugin:react/recommended"]
+	"extends": ["next", "next/core-web-vitals"],
+	"rules": {
+		"no-unused-vars": "warn"
+	}
 }

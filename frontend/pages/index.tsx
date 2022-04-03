@@ -10,7 +10,6 @@ const Home: NextPage = () => {
 					name='description'
 					content='Learn anything, On your schedule | eLMS'
 				/>
-				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<div
 				style={{
@@ -20,7 +19,7 @@ const Home: NextPage = () => {
 					height: '100vh',
 				}}
 			>
-				<h1>Homepage</h1>
+				<h1 style={{ fontSize: '66px' }}>Homepage</h1>
 			</div>
 		</>
 	);

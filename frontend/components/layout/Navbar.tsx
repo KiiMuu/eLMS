@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
 		dispatch(signout());
 		setMobileMoreAnchorEl(null);
 		router.push('/signin');
-	}, [dispatch]);
+	}, [dispatch, router]);
 
 	useEffect(() => {
 		if (signoutStatus === 'succeeded') {
@@ -105,20 +105,39 @@ const Navbar: React.FC = () => {
 				</>
 			)}
 			{user && (
-				<MenuItem onClick={handleLogout}>
-					<Button
-						size='small'
-						color='secondary'
-						sx={{
-							display: {
-								xs: 'none',
-								sm: 'block',
-							},
-						}}
-					>
-						Sign Out
-					</Button>
-				</MenuItem>
+				<>
+					<MenuItem>
+						<Link href='/user' passHref>
+							<Button
+								size='small'
+								color='secondary'
+								sx={{
+									display: {
+										xs: 'none',
+										sm: 'block',
+									},
+									textDecoration: 'none',
+								}}
+							>
+								Dashboard
+							</Button>
+						</Link>
+					</MenuItem>
+					<MenuItem onClick={handleLogout}>
+						<Button
+							size='small'
+							color='secondary'
+							sx={{
+								display: {
+									xs: 'none',
+									sm: 'block',
+								},
+							}}
+						>
+							Sign Out
+						</Button>
+					</MenuItem>
+				</>
 			)}
 		</Box>
 	);

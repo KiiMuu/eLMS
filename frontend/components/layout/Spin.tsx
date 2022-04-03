@@ -18,7 +18,7 @@ const Spin: React.FC<ISpin> = ({ size = 20, color = 'secondary' }) => {
 	return (
 		<Box
 			sx={{
-				height: '100vh',
+				height: '100%',
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',

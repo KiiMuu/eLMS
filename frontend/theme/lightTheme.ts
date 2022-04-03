@@ -13,7 +13,7 @@ const lightTheme = createTheme({
 		},
 	},
 	typography: {
-		fontFamily: 'Poppins, sans-serif',
+		fontFamily: ['Poppins', 'sans-serif'].join(','),
 		fontSize: 14,
 		htmlFontSize: 10,
 	},
@@ -21,14 +21,14 @@ const lightTheme = createTheme({
 		MuiCssBaseline: {
 			styleOverrides: `
 			    @font-face {
-			        font-family: 'Poppins';
+			        font-family: 'Poppins, sans-serif';
 			    }
 			`,
 		},
 		MuiAppBar: {
 			styleOverrides: {
 				root: {
-					boxShadow: '1px 2px 3px rgb(0 0 0 / 13%)',
+					boxShadow: '1px 2px 3px rgb(0 0 0 / 11%)',
 				},
 			},
 		},

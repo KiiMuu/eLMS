@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				return new Promise((resolve, reject) => {
 					axios
 						.get('/api/auth/signout')
-						.then(data => {
+						.then(() => {
 							console.log('/401 error > logout');
 							window.localStorage.removeItem('elmsUser');
 							router.push('/signin');

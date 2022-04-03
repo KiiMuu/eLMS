@@ -6,6 +6,7 @@ import {
 	PersonAddAltOutlined,
 	LogoutOutlined,
 	DashboardCustomize,
+	DashboardOutlined,
 } from '@mui/icons-material';
 
 const MobileMenu: React.FC<IMobileProps> = ({
@@ -70,15 +71,30 @@ const MobileMenu: React.FC<IMobileProps> = ({
 				</Link>
 			</MenuItem>
 			{user && (
-				<MenuItem onClick={handleLogout} key='4'>
-					<Button
-						size='small'
-						color='secondary'
-						startIcon={<LogoutOutlined fontSize='small' />}
-					>
-						Sign Out
-					</Button>
-				</MenuItem>
+				<>
+					<MenuItem key='4'>
+						<Link href='/user' passHref>
+							<Button
+								size='small'
+								color='secondary'
+								startIcon={
+									<DashboardOutlined fontSize='small' />
+								}
+							>
+								Dashboard
+							</Button>
+						</Link>
+					</MenuItem>
+					<MenuItem onClick={handleLogout} key='5'>
+						<Button
+							size='small'
+							color='secondary'
+							startIcon={<LogoutOutlined fontSize='small' />}
+						>
+							Sign Out
+						</Button>
+					</MenuItem>
+				</>
 			)}
 		</Menu>
 	);

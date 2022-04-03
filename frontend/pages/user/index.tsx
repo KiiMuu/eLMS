@@ -3,7 +3,9 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import { useAppDispatch, useAppSelector } from 'state/hooks';
 import { fetchCurrentUser } from 'state/auth/authApi';
+import UserRoute from 'components/layout/UserRoute';
 import Spin from 'components/layout/Spin';
+import { Box } from '@mui/material';
 
 const UserIndex: NextPage = () => {
 	const dispatch = useAppDispatch();
@@ -14,14 +16,15 @@ const UserIndex: NextPage = () => {
 	}, [dispatch]);
 
 	return (
-		<>
+		<UserRoute>
 			<Head>
-				<title>{user?.name} @ eLMS</title>
+				<title>{user?.name || 'User'} @ eLMS</title>
 				<meta name='user info' content={user?.name} />
-				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			{currentUserStatus === 'loading' ? (
-				<Spin />
+				<Box sx={{ height: '100vh' }}>
+					<Spin />
+				</Box>
 			) : (
 				<div
 					style={{
@@ -34,7 +37,7 @@ const UserIndex: NextPage = () => {
 					<pre>{JSON.stringify(user, null, 4)}</pre>
 				</div>
 			)}
-		</>
+		</UserRoute>
 	);
 };
 

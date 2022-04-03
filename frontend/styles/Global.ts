@@ -14,8 +14,8 @@ const GlobalCSS = globalCss({
 		fontSize: '62.5%',
 	},
 	body: {
-		boxSizing: 'border-box',
 		fontFamily: ['Poppins', 'sans-serif'].join(','),
+		boxSizing: 'border-box',
 		scrollBehavior: 'smooth',
 		fontSize: '1.6rem',
 		padding: '0',

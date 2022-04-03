@@ -94,6 +94,8 @@ const getCurrentUser = async (req: Request, res: Response): Promise<object> => {
 			.select('-password')
 			.exec();
 
+		console.log('REQ USER', req.user);
+
 		return res.json(currentUser);
 	} catch (error: any) {
 		return res.status(400).json({

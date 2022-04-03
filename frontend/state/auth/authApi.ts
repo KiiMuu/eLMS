@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IAuthData } from 'interfaces/auth';
-import { headers } from 'next.config';
 
 export const signup = createAsyncThunk(
 	'auth/signup',
@@ -9,14 +8,11 @@ export const signup = createAsyncThunk(
 		const { name, email, password } = signupData;
 
 		try {
-			const { data } = await axios.post(
-				`${process.env.NEXT_PUBLIC_API}/auth/signup`,
-				{
-					name,
-					email,
-					password,
-				}
-			);
+			const { data } = await axios.post('/api/auth/signup', {
+				name,
+				email,
+				password,
+			});
 
 			return data;
 		} catch (error: any) {
@@ -29,17 +25,14 @@ export const signup = createAsyncThunk(
 
 export const signin = createAsyncThunk(
 	'auth/signin',
-	async (signinData: IAuthData, { rejectWithValue }) => {
+	async (signinData: IAuthData, { rejectWithValue, getState }) => {
 		const { email, password } = signinData;
 
 		try {
-			const { data } = await axios.post(
-				`${process.env.NEXT_PUBLIC_API}/auth/signin`,
-				{
-					email,
-					password,
-				}
-			);
+			const { data } = await axios.post('/api/auth/signin', {
+				email,
+				password,
+			});
 
 			return data;
 		} catch (error: any) {
@@ -54,9 +47,7 @@ export const signout = createAsyncThunk(
 	'auth/signout',
 	async ({}, { rejectWithValue }) => {
 		try {
-			const { data } = await axios.get(
-				`${process.env.NEXT_PUBLIC_API}/auth/signout`
-			);
+			const { data } = await axios.get('/api/auth/signout');
 
 			return data;
 		} catch (error: any) {

@@ -52,9 +52,7 @@ const Signin: NextPage = () => {
 
 			setUser(res);
 
-			if (signinStatus === 'succeeded') {
-				router.push('/');
-			}
+			router.push('/');
 		} catch (error) {
 			setOpenSnackbar(true);
 			console.log('ERROR!', error);

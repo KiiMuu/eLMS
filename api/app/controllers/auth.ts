@@ -55,9 +55,9 @@ const signin = async (
 			]);
 		}
 
-		const match = await comparePassword(password, user.password);
+		const isMatch = await comparePassword(password, user.password);
 
-		if (!match) {
+		if (!isMatch) {
 			return res.status(400).json([
 				{
 					param: 'password',
@@ -74,9 +74,9 @@ const signin = async (
 
 		user.password = undefined!;
 
-		res.cookie('elmsToken', token, {
+		res.cookie('token', token, {
 			httpOnly: true,
-			// secure: true // only works on https
+			// secure: true // only works on https!
 		});
 
 		return res.json(user);
@@ -104,7 +104,7 @@ const getCurrentUser = async (req: Request, res: Response): Promise<object> => {
 
 const signout = async (req: Request, res: Response): Promise<object> => {
 	try {
-		res.clearCookie('elmsToken');
+		res.clearCookie('token');
 
 		return res.json({ msg: 'Signed out success.' });
 	} catch (error: any) {

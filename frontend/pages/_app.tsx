@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			) {
 				return new Promise((resolve, reject) => {
 					axios
-						.get(`${process.env.NEXT_PUBLIC_API}/auth/signout`)
+						.get('/api/auth/signout')
 						.then(data => {
 							console.log('/401 error > logout');
 							window.localStorage.removeItem('elmsUser');
@@ -45,15 +45,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	useEffect(() => {
 		const getCsrfToken = async () => {
-			const { data } = await axios.get(
-				`${process.env.NEXT_PUBLIC_API}/csrf-token`
-			);
+			const { data } = await axios.get('/api/csrf-token');
 
-			console.log({ data });
-
-			// To include the CSRF token in all requests
+			// Include the CSRF token in all requests
 			// @ts-ignore
-			axios.defaults.headers.common['X-CSRF-TOKEN'] = data.csrfToken;
+			axios.defaults.headers['X-CSRF-Token'] = data.csrfToken;
 		};
 
 		getCsrfToken();

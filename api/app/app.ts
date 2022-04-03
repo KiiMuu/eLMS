@@ -9,7 +9,9 @@ import fs from 'fs';
 require('dotenv').config();
 import connectToDB from './config/db';
 
-const csrfProtection = csurf({ cookie: true });
+const csrfProtection = csurf({
+	cookie: true,
+});
 
 // init ex app
 let app = express();
@@ -18,12 +20,12 @@ let app = express();
 connectToDB;
 
 // apply middlewares
-app.use(cookieParser());
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(compression());
+app.use(cookieParser());
 
 // routes
 fs.readdirSync('app/routes').map((route: string) => {
@@ -33,7 +35,6 @@ fs.readdirSync('app/routes').map((route: string) => {
 });
 
 app.use(csrfProtection);
-
 app.get('/api/csrf-token', (req, res) => {
 	res.json({ csrfToken: req.csrfToken() });
 });

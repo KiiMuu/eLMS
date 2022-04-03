@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import type { NextPage } from 'next';
+import { NextPage } from 'next';
 import Head from 'next/head';
 
 const UserIndex: NextPage = () => {
@@ -9,13 +9,9 @@ const UserIndex: NextPage = () => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const { data } = await axios.get(
-					`${process.env.NEXT_PUBLIC_API}/auth/current`
-				);
+				const { data } = await axios.get('/api/auth/current');
 
 				setCurrentUser(data);
-
-				console.log({ data });
 			} catch (error) {
 				console.log(error);
 			}
@@ -31,16 +27,18 @@ const UserIndex: NextPage = () => {
 				<meta name='description' content='user | eLMS' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<div
-				style={{
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					height: '100vh',
-				}}
-			>
-				<pre>{JSON.stringify(currentUser, null, 4)}</pre>
-			</div>
+			{currentUser && (
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						height: '100vh',
+					}}
+				>
+					<pre>{JSON.stringify(currentUser, null, 4)}</pre>
+				</div>
+			)}
 		</>
 	);
 };

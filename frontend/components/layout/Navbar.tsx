@@ -38,9 +38,14 @@ const Navbar: React.FC = () => {
 	const handleLogout = useCallback(() => {
 		dispatch(signout());
 		setMobileMoreAnchorEl(null);
-		window.localStorage.removeItem('elmsUser');
 		router.push('/signin');
 	}, [dispatch]);
+
+	useEffect(() => {
+		if (signoutStatus === 'succeeded') {
+			window.localStorage.removeItem('elmsUser');
+		}
+	}, [signoutStatus]);
 
 	const renderNavItems = () => (
 		<Box sx={{ display: { xs: 'none', md: 'flex' } }}>

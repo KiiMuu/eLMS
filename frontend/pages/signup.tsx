@@ -54,9 +54,7 @@ const Signup: NextPage = () => {
 
 			setUser(res);
 
-			if (signupStatus === 'succeeded') {
-				router.push('/');
-			}
+			router.push('/');
 		} catch (error) {
 			setOpenSnackbar(true);
 			console.log('ERROR!', error);

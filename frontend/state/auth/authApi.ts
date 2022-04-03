@@ -25,7 +25,7 @@ export const signup = createAsyncThunk(
 
 export const signin = createAsyncThunk(
 	'auth/signin',
-	async (signinData: IAuthData, { rejectWithValue, getState }) => {
+	async (signinData: IAuthData, { rejectWithValue }) => {
 		const { email, password } = signinData;
 
 		try {
@@ -33,6 +33,21 @@ export const signin = createAsyncThunk(
 				email,
 				password,
 			});
+
+			return data;
+		} catch (error: any) {
+			return rejectWithValue(
+				error.response ? error.response.data : error
+			);
+		}
+	}
+);
+
+export const fetchCurrentUser = createAsyncThunk(
+	'auth/current',
+	async ({}, { rejectWithValue }) => {
+		try {
+			const { data } = await axios.get('/api/auth/current');
 
 			return data;
 		} catch (error: any) {

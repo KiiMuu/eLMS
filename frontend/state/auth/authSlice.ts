@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from 'interfaces/auth';
-import { signup, signin, signout } from './authApi';
+import { signup, signin, signout, fetchCurrentUser } from './authApi';
 
 let userState;
 if (typeof window !== 'undefined') {
@@ -24,6 +24,7 @@ export const authSlice = createSlice({
 		signoutErrors: [] as any,
 		signoutSuccessAlert: '',
 		user: userState as User | null,
+		currentUserStatus: 'idle',
 	},
 	reducers: {
 		// onSignOut: state => {
@@ -53,6 +54,16 @@ export const authSlice = createSlice({
 			.addCase(signin.rejected, (state, action) => {
 				state.signinStatus = 'failed';
 				state.signinErrors = action.payload;
+			})
+			.addCase(fetchCurrentUser.pending, (state, action) => {
+				state.currentUserStatus = 'loading';
+			})
+			.addCase(fetchCurrentUser.fulfilled, (state, action) => {
+				state.currentUserStatus = 'succeeded';
+				state.user = action.payload;
+			})
+			.addCase(fetchCurrentUser.rejected, (state, action) => {
+				state.currentUserStatus = 'failed';
 			})
 			.addCase(signout.pending, (state, action) => {
 				state.signoutStatus = 'loading';

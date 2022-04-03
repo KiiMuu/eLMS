@@ -1,33 +1,28 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
+import { useAppDispatch, useAppSelector } from 'state/hooks';
+import { fetchCurrentUser } from 'state/auth/authApi';
+import Spin from 'components/layout/Spin';
 
 const UserIndex: NextPage = () => {
-	const [currentUser, setCurrentUser] = useState(null);
+	const dispatch = useAppDispatch();
+	const { currentUserStatus, user } = useAppSelector(state => state.auth);
 
 	useEffect(() => {
-		const fetchUser = async () => {
-			try {
-				const { data } = await axios.get('/api/auth/current');
-
-				setCurrentUser(data);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
-		fetchUser();
-	}, []);
+		dispatch(fetchCurrentUser());
+	}, [dispatch]);
 
 	return (
 		<>
 			<Head>
-				<title>User | eLMS</title>
-				<meta name='description' content='user | eLMS' />
+				<title>{user?.name} @ eLMS</title>
+				<meta name='user info' content={user?.name} />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			{currentUser && (
+			{currentUserStatus === 'loading' ? (
+				<Spin />
+			) : (
 				<div
 					style={{
 						display: 'flex',
@@ -36,7 +31,7 @@ const UserIndex: NextPage = () => {
 						height: '100vh',
 					}}
 				>
-					<pre>{JSON.stringify(currentUser, null, 4)}</pre>
+					<pre>{JSON.stringify(user, null, 4)}</pre>
 				</div>
 			)}
 		</>

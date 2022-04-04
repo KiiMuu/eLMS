@@ -10,14 +10,7 @@ import { IErrorData, User } from 'interfaces/auth';
 import AlertMessage from 'components/alerts/AlertMessage';
 import useSnackBar from 'hooks/useSnackbar';
 import { AuthWrapper } from 'styles/Auth';
-import {
-	Container,
-	Grid,
-	Typography,
-	useMediaQuery,
-	Theme,
-	Button,
-} from '@mui/material';
+import { Container, Grid, Typography, Button } from '@mui/material';
 
 const Signin: NextPage = () => {
 	const [name, setName] = useState('');
@@ -28,7 +21,6 @@ const Signin: NextPage = () => {
 
 	const dispatch = useAppDispatch();
 	const { signinStatus, signinErrors } = useAppSelector(state => state.auth);
-	const md = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const { openSnackbar, handleCloseSnackbar, setOpenSnackbar } =
 		useSnackBar();
 	const router = useRouter();
@@ -90,7 +82,7 @@ const Signin: NextPage = () => {
 						<Container maxWidth='xl'>
 							<div className='headingContent'>
 								<Typography
-									variant={md ? 'h3' : 'h1'}
+									variant='h1'
 									fontWeight='bold'
 									color='primary'
 								>

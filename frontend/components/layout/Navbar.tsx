@@ -66,64 +66,9 @@ const Navbar: React.FC = () => {
 					</Button>
 				</Link>
 			</MenuItem>
-			{!user && (
-				<>
-					<MenuItem>
-						<Link href='/signup' passHref>
-							<Button
-								size='small'
-								color='secondary'
-								sx={{
-									display: {
-										xs: 'none',
-										sm: 'block',
-									},
-									textDecoration: 'none',
-								}}
-							>
-								Sign Up
-							</Button>
-						</Link>
-					</MenuItem>
-					<MenuItem>
-						<Link href='/signin' passHref>
-							<Button
-								size='small'
-								color='secondary'
-								sx={{
-									display: {
-										xs: 'none',
-										sm: 'block',
-									},
-									textDecoration: 'none',
-								}}
-							>
-								Sign In
-							</Button>
-						</Link>
-					</MenuItem>
-				</>
-			)}
-			{user && (
-				<>
-					<MenuItem>
-						<Link href='/user' passHref>
-							<Button
-								size='small'
-								color='secondary'
-								sx={{
-									display: {
-										xs: 'none',
-										sm: 'block',
-									},
-									textDecoration: 'none',
-								}}
-							>
-								Dashboard
-							</Button>
-						</Link>
-					</MenuItem>
-					<MenuItem onClick={handleLogout}>
+			{!user && [
+				<MenuItem key='1'>
+					<Link href='/signup' passHref>
 						<Button
 							size='small'
 							color='secondary'
@@ -132,13 +77,64 @@ const Navbar: React.FC = () => {
 									xs: 'none',
 									sm: 'block',
 								},
+								textDecoration: 'none',
 							}}
 						>
-							Sign Out
+							Sign Up
 						</Button>
-					</MenuItem>
-				</>
-			)}
+					</Link>
+				</MenuItem>,
+				<MenuItem key='2'>
+					<Link href='/signin' passHref>
+						<Button
+							size='small'
+							color='secondary'
+							sx={{
+								display: {
+									xs: 'none',
+									sm: 'block',
+								},
+								textDecoration: 'none',
+							}}
+						>
+							Sign In
+						</Button>
+					</Link>
+				</MenuItem>,
+			]}
+			{user && [
+				<MenuItem key='3'>
+					<Link href='/user' passHref>
+						<Button
+							size='small'
+							color='secondary'
+							sx={{
+								display: {
+									xs: 'none',
+									sm: 'block',
+								},
+								textDecoration: 'none',
+							}}
+						>
+							Dashboard
+						</Button>
+					</Link>
+				</MenuItem>,
+				<MenuItem onClick={handleLogout} key='4'>
+					<Button
+						size='small'
+						color='secondary'
+						sx={{
+							display: {
+								xs: 'none',
+								sm: 'block',
+							},
+						}}
+					>
+						Sign Out
+					</Button>
+				</MenuItem>,
+			]}
 		</Box>
 	);
 

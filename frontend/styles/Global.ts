@@ -1,4 +1,4 @@
-import { globalCss } from '@stitches/react';
+import { createStitches, globalCss } from '@stitches/react';
 
 const GlobalCSS = globalCss({
 	':root': {

@@ -28,6 +28,10 @@ const userSchema = new mongoose_1.Schema({
         default: 'subscriber',
         enum: ['subscriber', 'instructor', 'admin'],
     },
+    passwordResetCode: {
+        data: String,
+        default: '',
+    },
     stripe_account_id: '',
     stripe_seller: {},
     stripeSession: {},

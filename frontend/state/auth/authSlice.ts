@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from 'interfaces/auth';
-import { signup, signin, signout, fetchCurrentUser } from './authApi';
+import {
+	signup,
+	signin,
+	signout,
+	fetchCurrentUser,
+	forgotPassword,
+	resetPassword,
+} from './authApi';
 
 let userState;
 if (typeof window !== 'undefined') {
@@ -25,6 +32,10 @@ export const authSlice = createSlice({
 		signoutSuccessAlert: '',
 		user: userState as User | null,
 		currentUserStatus: 'idle',
+		forgotPasswordStatus: 'idle',
+		forgotPasswordMsg: '',
+		resetPasswordStatus: 'idle',
+		resetPasswordMsg: '',
 	},
 	reducers: {
 		// onSignOut: state => {
@@ -64,6 +75,30 @@ export const authSlice = createSlice({
 			})
 			.addCase(fetchCurrentUser.rejected, (state, action) => {
 				state.currentUserStatus = 'failed';
+			})
+			.addCase(forgotPassword.pending, (state, action) => {
+				state.forgotPasswordStatus = 'loading';
+			})
+			.addCase(forgotPassword.fulfilled, (state, action) => {
+				state.forgotPasswordStatus = 'succeeded';
+				state.forgotPasswordMsg =
+					'Check your email for the secret code.';
+			})
+			.addCase(forgotPassword.rejected, (state, action) => {
+				state.forgotPasswordStatus = 'failed';
+				state.forgotPasswordMsg = action.payload as string;
+			})
+			.addCase(resetPassword.pending, (state, action) => {
+				state.resetPasswordStatus = 'loading';
+			})
+			.addCase(resetPassword.fulfilled, (state, action) => {
+				state.resetPasswordStatus = 'succeeded';
+				state.resetPasswordMsg =
+					'Your password has been successfully changed. Try to signin with the new passwords.';
+			})
+			.addCase(resetPassword.rejected, (state, action) => {
+				state.resetPasswordStatus = 'failed';
+				state.resetPasswordMsg = action.payload as string;
 			})
 			.addCase(signout.pending, (state, action) => {
 				state.signoutStatus = 'loading';

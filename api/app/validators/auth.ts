@@ -38,3 +38,29 @@ export const areValidAuthInputs = (
 
 	next();
 };
+
+export const validateResetPasswordFields = (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	const { code, newPassword } = req.body;
+
+	if (!code) {
+		return res
+			.status(422)
+			.json('Please provide the code that sent to your email.');
+	} else if (code.length !== 6) {
+		return res
+			.status(422)
+			.json('Secert code must contain 6 characters long.');
+	}
+
+	if (!newPassword || newPassword.length < 6) {
+		return res
+			.status(422)
+			.json('Password must be provided and at least 6 characters long.');
+	}
+
+	next();
+};

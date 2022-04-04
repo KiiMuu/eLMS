@@ -13,6 +13,7 @@
 	"author": "Kariim Muhamad",
 	"license": "ISC",
 	"dependencies": {
+		"@trycourier/courier": "^3.12.0",
 		"@types/bcrypt": "^5.0.0",
 		"@types/compression": "^1.7.2",
 		"@types/cors": "^2.8.12",
@@ -35,6 +36,7 @@
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^6.2.5",
 		"morgan": "^1.10.0",
+		"nanoid": "^3.3.2",
 		"ts-node-dev": "^1.1.8",
 		"typescript": "^4.6.2"
 	},

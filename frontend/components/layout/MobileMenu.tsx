@@ -70,32 +70,28 @@ const MobileMenu: React.FC<IMobileProps> = ({
 					</Button>
 				</Link>
 			</MenuItem>
-			{user && (
-				<>
-					<MenuItem key='4'>
-						<Link href='/user' passHref>
-							<Button
-								size='small'
-								color='secondary'
-								startIcon={
-									<DashboardOutlined fontSize='small' />
-								}
-							>
-								Dashboard
-							</Button>
-						</Link>
-					</MenuItem>
-					<MenuItem onClick={handleLogout} key='5'>
+			{user && [
+				<MenuItem key='4'>
+					<Link href='/user' passHref>
 						<Button
 							size='small'
 							color='secondary'
-							startIcon={<LogoutOutlined fontSize='small' />}
+							startIcon={<DashboardOutlined fontSize='small' />}
 						>
-							Sign Out
+							Dashboard
 						</Button>
-					</MenuItem>
-				</>
-			)}
+					</Link>
+				</MenuItem>,
+				<MenuItem onClick={handleLogout} key='5'>
+					<Button
+						size='small'
+						color='secondary'
+						startIcon={<LogoutOutlined fontSize='small' />}
+					>
+						Sign Out
+					</Button>
+				</MenuItem>,
+			]}
 		</Menu>
 	);
 };

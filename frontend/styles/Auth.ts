@@ -38,3 +38,22 @@ export const AuthWrapper = styled('section', alignItemsVerticallyHorizontally, {
 		},
 	},
 });
+
+export const ResetPasswordWrapper = styled(
+	'section',
+	alignItemsVerticallyHorizontally,
+	{
+		flexDirection: 'column',
+		height: '100vh',
+	},
+	{
+		'& .form': {
+			// background:
+			// 	'linear-gradient(to right, rgba(46, 204, 113, .24), rgba(255, 255, 255, 1))',
+			// borderRadius: '4px',
+			// padding: '10px',
+			// border: '2px solid rgba(46, 204, 113, .24)',
+			// boxShadow: '1px 2px 6px 1px rgb(0 0 0 / 15%)',
+		},
+	}
+);

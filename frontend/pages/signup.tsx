@@ -10,14 +10,7 @@ import { IErrorData, User } from 'interfaces/auth';
 import AlertMessage from 'components/alerts/AlertMessage';
 import useSnackBar from 'hooks/useSnackbar';
 import { AuthWrapper } from 'styles/Auth';
-import {
-	Container,
-	Grid,
-	Typography,
-	useMediaQuery,
-	Theme,
-	Button,
-} from '@mui/material';
+import { Container, Grid, Typography, Button } from '@mui/material';
 
 const Signup: NextPage = () => {
 	const [name, setName] = useState('');
@@ -28,7 +21,6 @@ const Signup: NextPage = () => {
 
 	const dispatch = useAppDispatch();
 	const { signupStatus, signupErrors } = useAppSelector(state => state.auth);
-	const md = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 	const { openSnackbar, handleCloseSnackbar, setOpenSnackbar } =
 		useSnackBar();
 	const router = useRouter();
@@ -92,12 +84,11 @@ const Signup: NextPage = () => {
 						<Container maxWidth='xl'>
 							<div className='headingContent'>
 								<Typography
-									variant={md ? 'h3' : 'h1'}
+									variant='h1'
 									fontWeight='bold'
 									color='primary'
-									gutterBottom
 								>
-									Online Education Marketplace
+									Online Education Marketplace.
 								</Typography>
 								<Typography variant='h5' fontWeight='bold'>
 									Learn anything, On your schedule @ eLMS

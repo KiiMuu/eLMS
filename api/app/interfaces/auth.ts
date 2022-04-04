@@ -7,6 +7,7 @@ export interface IUserModel extends Document {
 	password: string;
 	picture: string;
 	role: string;
+	passwordResetCode: string;
 	stripe_account_id: string;
 	stripe_seller: object;
 	stripeSession: object;

@@ -145,7 +145,7 @@ const SignInForm: React.FC<IAuthForm> = ({
 					</Button>
 				</Link>
 			</Stack>
-			<Link href='/password/reset' passHref>
+			<Link href='/password/forgot' passHref>
 				<Button
 					disableElevation
 					sx={{

@@ -29,6 +29,10 @@ const userSchema: Schema = new Schema<IUserModel>(
 			default: 'subscriber',
 			enum: ['subscriber', 'instructor', 'admin'],
 		},
+		passwordResetCode: {
+			data: String,
+			default: '',
+		},
 		stripe_account_id: '',
 		stripe_seller: {},
 		stripeSession: {},

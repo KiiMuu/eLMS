@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-const lightTheme = createTheme({
+let lightTheme = createTheme({
 	palette: {
 		mode: 'light',
 		primary: {
@@ -28,6 +28,7 @@ const lightTheme = createTheme({
 		MuiAppBar: {
 			styleOverrides: {
 				root: {
+					background: '#fff',
 					boxShadow: '1px 2px 3px rgb(0 0 0 / 11%)',
 				},
 			},
@@ -41,5 +42,7 @@ const lightTheme = createTheme({
 		},
 	},
 });
+
+lightTheme = responsiveFontSizes(lightTheme);
 
 export default lightTheme;

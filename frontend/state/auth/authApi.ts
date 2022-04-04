@@ -58,6 +58,49 @@ export const fetchCurrentUser = createAsyncThunk(
 	}
 );
 
+export const forgotPassword = createAsyncThunk(
+	'password/forgot',
+	async (forgotData: { email: string }, { rejectWithValue }) => {
+		const { email } = forgotData;
+
+		try {
+			const { data } = await axios.post('/api/password/forgot', {
+				email,
+			});
+
+			return data;
+		} catch (error: any) {
+			return rejectWithValue(
+				error.response ? error.response.data : error
+			);
+		}
+	}
+);
+
+export const resetPassword = createAsyncThunk(
+	'password/reset',
+	async (
+		resetData: { email: string; code: string; newPassword: string },
+		{ rejectWithValue }
+	) => {
+		const { email, code, newPassword } = resetData;
+
+		try {
+			const { data } = await axios.post('/api/password/reset', {
+				email,
+				code,
+				newPassword,
+			});
+
+			return data;
+		} catch (error: any) {
+			return rejectWithValue(
+				error.response ? error.response.data : error
+			);
+		}
+	}
+);
+
 export const signout = createAsyncThunk(
 	'auth/signout',
 	async ({}, { rejectWithValue }) => {

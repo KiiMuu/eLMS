@@ -80,7 +80,7 @@ const getCurrentUser = async (req, res) => {
     try {
         // @ts-ignore: Unreachable code error
         let currentUser = await User_1.default.findById((_a = req.user) === null || _a === void 0 ? void 0 : _a._id)
-            .select('-password')
+            .select('-password -passwordResetCode')
             .exec();
         return res.json(currentUser);
     }

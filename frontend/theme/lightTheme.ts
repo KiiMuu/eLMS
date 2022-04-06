@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 let lightTheme = createTheme({
 	palette: {
@@ -30,6 +30,7 @@ let lightTheme = createTheme({
 				root: {
 					background: '#fff',
 					boxShadow: '1px 2px 3px rgb(0 0 0 / 11%)',
+					zIndex: 99999,
 				},
 			},
 		},
@@ -42,7 +43,5 @@ let lightTheme = createTheme({
 		},
 	},
 });
-
-lightTheme = responsiveFontSizes(lightTheme);
 
 export default lightTheme;

@@ -31,7 +31,7 @@ const ForgotPassword: NextPage = () => {
 		if (forgotPasswordStatus === 'succeeded') {
 			window.localStorage.setItem('elmsUserEmail', email);
 		}
-	}, [forgotPasswordStatus, router]);
+	}, [forgotPasswordStatus, router, email]);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

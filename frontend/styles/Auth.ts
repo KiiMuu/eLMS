@@ -6,7 +6,7 @@ export const AuthWrapper = styled('section', alignItemsVerticallyHorizontally, {
 		route: {
 			signup: {
 				backgroundImage:
-					'linear-gradient(to left, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.25)), url(img/auth/undraw_signup.svg)',
+					'linear-gradient(to left, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.75)), url(img/auth/undraw_signup.svg)',
 			},
 			signin: {
 				backgroundImage:

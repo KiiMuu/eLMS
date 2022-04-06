@@ -99,7 +99,7 @@ const ResetPassword: NextPage = () => {
 			/>
 			<Container maxWidth='sm'>
 				<Typography variant='h4' fontWeight='bold'>
-					You're almost done.
+					You&apos;re almost done.
 				</Typography>
 				<Typography
 					variant='subtitle1'

@@ -1,7 +1,7 @@
 import { FC, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAppSelector } from 'state/hooks';
-import Spin from './Spin';
+import Spin from '../layout/Spin';
 import { Box } from '@mui/material';
 
 const UserRoute: FC<ReactNode> = ({ children }) => {

@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from 'state/hooks';
 import { signout } from 'state/auth/authApi';
-import HideOnscroll from './HideOnScroll';
-import MobileMenu from './MobileMenu';
+import { handleDrawerToggle } from 'state/global';
+import HideOnscroll from '../layout/HideOnScroll';
+import MobileMenu from '../layout/MobileMenu';
 import {
 	AppBar,
 	IconButton,
@@ -14,6 +15,7 @@ import {
 	Avatar,
 } from '@mui/material';
 import { Box } from '@mui/system';
+import { Menu } from '@mui/icons-material';
 
 const Navbar: React.FC = () => {
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -40,6 +42,10 @@ const Navbar: React.FC = () => {
 		setMobileMoreAnchorEl(null);
 		router.push('/signin');
 	}, [dispatch, router]);
+
+	const drawerToggle = useCallback(() => {
+		dispatch(handleDrawerToggle());
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (signoutStatus === 'succeeded') {
@@ -143,6 +149,18 @@ const Navbar: React.FC = () => {
 			<HideOnscroll>
 				<AppBar position='fixed' color='transparent'>
 					<Toolbar>
+						<IconButton
+							size='large'
+							edge='start'
+							color='inherit'
+							aria-label='menu'
+							sx={{
+								display: { sm: 'none' },
+							}}
+							onClick={drawerToggle}
+						>
+							<Menu />
+						</IconButton>
 						<Link href='/' passHref>
 							<Button
 								size='large'

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import axios from 'axios';
 import { store } from 'state/store';
 import lightTheme from 'theme/lightTheme';
-import Navbar from 'components/layout/Navbar';
+import Navbar from 'components/navigations/Navbar';
 import { ThemeProvider } from '@mui/material';
 import GlobalCSS from 'styles/Global';
 

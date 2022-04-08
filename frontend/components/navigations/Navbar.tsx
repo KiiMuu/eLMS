@@ -17,6 +17,14 @@ import {
 import { Box } from '@mui/system';
 import { Menu } from '@mui/icons-material';
 
+const navItemStyle = {
+	display: {
+		xs: 'none',
+		sm: 'block',
+	},
+	textDecoration: 'none',
+};
+
 const Navbar: React.FC = () => {
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
@@ -57,34 +65,43 @@ const Navbar: React.FC = () => {
 		<Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 			<MenuItem>
 				<Link href='/courses' passHref>
-					<Button
-						size='small'
-						color='secondary'
-						sx={{
-							display: {
-								xs: 'none',
-								sm: 'block',
-							},
-							textDecoration: 'none',
-						}}
-					>
+					<Button size='small' color='secondary' sx={navItemStyle}>
 						Courses
 					</Button>
 				</Link>
 			</MenuItem>
+			{user?.role === 'instructor' ? (
+				<MenuItem>
+					<Link href='/instructor/course/create' passHref>
+						<Button
+							size='small'
+							color='secondary'
+							sx={navItemStyle}
+						>
+							Create Course
+						</Button>
+					</Link>
+				</MenuItem>
+			) : (
+				<MenuItem>
+					<Link href='/user/become-instructor' passHref>
+						<Button
+							size='small'
+							color='secondary'
+							sx={navItemStyle}
+						>
+							Become Instructor
+						</Button>
+					</Link>
+				</MenuItem>
+			)}
 			{!user && [
 				<MenuItem key='1'>
 					<Link href='/signup' passHref>
 						<Button
 							size='small'
 							color='secondary'
-							sx={{
-								display: {
-									xs: 'none',
-									sm: 'block',
-								},
-								textDecoration: 'none',
-							}}
+							sx={navItemStyle}
 						>
 							Sign Up
 						</Button>
@@ -95,13 +112,7 @@ const Navbar: React.FC = () => {
 						<Button
 							size='small'
 							color='secondary'
-							sx={{
-								display: {
-									xs: 'none',
-									sm: 'block',
-								},
-								textDecoration: 'none',
-							}}
+							sx={navItemStyle}
 						>
 							Sign In
 						</Button>
@@ -114,29 +125,14 @@ const Navbar: React.FC = () => {
 						<Button
 							size='small'
 							color='secondary'
-							sx={{
-								display: {
-									xs: 'none',
-									sm: 'block',
-								},
-								textDecoration: 'none',
-							}}
+							sx={navItemStyle}
 						>
 							Dashboard
 						</Button>
 					</Link>
 				</MenuItem>,
 				<MenuItem onClick={handleLogout} key='4'>
-					<Button
-						size='small'
-						color='secondary'
-						sx={{
-							display: {
-								xs: 'none',
-								sm: 'block',
-							},
-						}}
-					>
+					<Button size='small' color='secondary' sx={navItemStyle}>
 						Sign Out
 					</Button>
 				</MenuItem>,

@@ -1,17 +1,32 @@
 import { FC, ReactNode } from 'react';
-import { Grid } from '@mui/material';
 import UserNavigation from 'components/navigations/UserNavigation';
+import { Box } from '@mui/system';
 
 const UserLayout: FC<ReactNode> = ({ children }) => {
 	return (
-		<Grid container spacing={[2, 2]}>
-			<Grid item sm={2}>
+		<Box sx={{ display: 'flex' }}>
+			<Box
+				component='nav'
+				sx={{
+					width: { sm: 240 },
+					flexShrink: { sm: 0 },
+					background: 'red',
+				}}
+				aria-label='user sider'
+			>
 				<UserNavigation />
-			</Grid>
-			<Grid item sm={10}>
+			</Box>
+			<Box
+				component='main'
+				sx={{
+					flexGrow: 1,
+					width: { sm: `calc(100% - 240px)` },
+					background: 'green',
+				}}
+			>
 				{children}
-			</Grid>
-		</Grid>
+			</Box>
+		</Box>
 	);
 };
 

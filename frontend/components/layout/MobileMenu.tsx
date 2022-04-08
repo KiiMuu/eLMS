@@ -9,6 +9,14 @@ import {
 	DashboardOutlined,
 } from '@mui/icons-material';
 
+const navItemStyle = {
+	display: {
+        xs: 'none',
+        sm: 'block',
+    },
+    textDecoration: 'none',
+};
+
 const MobileMenu: React.FC<IMobileProps> = ({
 	mobileMoreAnchorEl,
 	isMobileMenuOpen,
@@ -70,6 +78,31 @@ const MobileMenu: React.FC<IMobileProps> = ({
 					</Button>
 				</Link>
 			</MenuItem>
+			{user?.role === 'instructor' ? (
+				<MenuItem>
+					<Link href='/instructor/course/create' passHref>
+						<Button
+							size='small'
+							color='secondary'
+							sx={navItemStyle}
+						>
+							Create Course
+						</Button>
+					</Link>
+				</MenuItem>
+			) : (
+				<MenuItem>
+					<Link href='/user/become-instructor' passHref>
+						<Button
+							size='small'
+							color='secondary'
+							sx={navItemStyle}
+						>
+							Become Instructor
+						</Button>
+					</Link>
+				</MenuItem>
+			)}
 			{user && [
 				<MenuItem key='4'>
 					<Link href='/user' passHref>

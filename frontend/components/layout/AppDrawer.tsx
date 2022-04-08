@@ -1,9 +1,7 @@
 import { FC, ReactNode, useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from 'state/hooks';
 import { handleDrawerToggle } from 'state/global';
-import { Drawer, Box } from '@mui/material';
-
-const drawerWidth = 240;
+import { Drawer } from '@mui/material';
 
 const AppDrawer: FC<ReactNode> = ({ children }) => {
 	const dispatch = useAppDispatch();
@@ -14,11 +12,7 @@ const AppDrawer: FC<ReactNode> = ({ children }) => {
 	}, [dispatch]);
 
 	return (
-		<Box
-			component='nav'
-			sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-			aria-label='user sider'
-		>
+		<>
 			<Drawer
 				variant='temporary'
 				open={drawerOpen}
@@ -30,7 +24,7 @@ const AppDrawer: FC<ReactNode> = ({ children }) => {
 					display: { xs: 'block', sm: 'none' },
 					'& .MuiDrawer-paper': {
 						boxSizing: 'border-box',
-						width: drawerWidth,
+						width: 240,
 					},
 				}}
 			>
@@ -42,14 +36,14 @@ const AppDrawer: FC<ReactNode> = ({ children }) => {
 					display: { xs: 'none', sm: 'block' },
 					'& .MuiDrawer-paper': {
 						boxSizing: 'border-box',
-						width: drawerWidth,
+						width: 240,
 					},
 				}}
 				open
 			>
 				{children}
 			</Drawer>
-		</Box>
+		</>
 	);
 };
 

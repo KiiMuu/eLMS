@@ -28,16 +28,7 @@ const UserIndex: NextPage = () => {
 						<Spin />
 					</Box>
 				) : (
-					<Box
-						sx={{
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-							height: '100vh',
-						}}
-					>
-						main content here.
-					</Box>
+					<div>main content here!!!!!!!!!!!</div>
 				)}
 			</UserLayout>
 		</UserRoute>

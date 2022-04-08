@@ -9,12 +9,14 @@ const GlobalCSS = globalCss({
 		'--textGray': 'rgb(91, 112, 131)',
 		'--navHeight': '64px',
 		'--mobNavHeight': '56px',
+		'--userSiderWidth': '240px',
 	},
 	html: {
 		fontSize: '62.5%',
 	},
 	body: {
-		fontFamily: ['Poppins', 'sans-serif'].join(','),
+		// fontFamily: ['Poppins', 'sans-serif'].join(','),
+		fontFamily: ['Montserrat', 'Roboto', 'sans-serif'].join(','),
 		boxSizing: 'border-box',
 		scrollBehavior: 'smooth',
 		fontSize: '1.6rem',

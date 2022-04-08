@@ -19,9 +19,14 @@ let lightTheme = createTheme({
 	},
 	components: {
 		MuiCssBaseline: {
+			// styleOverrides: `
+			//     @font-face {
+			//         font-family: 'Poppins, sans-serif';
+			//     }
+			// `,
 			styleOverrides: `
 			    @font-face {
-			        font-family: 'Poppins, sans-serif';
+			        font-family: 'Montserrat', 'Roboto', 'sans-serif';
 			    }
 			`,
 		},

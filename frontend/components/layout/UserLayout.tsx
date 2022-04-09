@@ -1,15 +1,16 @@
 import { FC, ReactNode } from 'react';
 import UserNavigation from 'components/navigations/UserNavigation';
 import { Box } from '@mui/system';
+import { UserLayoutStyle } from 'styles/user';
 
 const UserLayout: FC<ReactNode> = ({ children }) => {
 	return (
-		<Box sx={{ display: 'flex' }}>
+		<UserLayoutStyle>
 			<Box
 				component='nav'
 				sx={{
-					width: { sm: 240 },
-					flexShrink: { sm: 0 },
+					width: { md: 240 },
+					flexShrink: { md: 0 },
 					background: 'red',
 				}}
 				aria-label='user sider'
@@ -20,13 +21,11 @@ const UserLayout: FC<ReactNode> = ({ children }) => {
 				component='main'
 				sx={{
 					flexGrow: 1,
-					width: { sm: `calc(100% - 240px)` },
-					background: 'green',
 				}}
 			>
 				{children}
 			</Box>
-		</Box>
+		</UserLayoutStyle>
 	);
 };
 

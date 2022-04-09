@@ -9,14 +9,6 @@ import {
 	DashboardOutlined,
 } from '@mui/icons-material';
 
-const navItemStyle = {
-	display: {
-        xs: 'none',
-        sm: 'block',
-    },
-    textDecoration: 'none',
-};
-
 const MobileMenu: React.FC<IMobileProps> = ({
 	mobileMoreAnchorEl,
 	isMobileMenuOpen,
@@ -40,6 +32,7 @@ const MobileMenu: React.FC<IMobileProps> = ({
 			}}
 			open={isMobileMenuOpen}
 			onClose={handleMobileMenuClose}
+			sx={{ zIndex: 99999 }}
 		>
 			{!user && [
 				<MenuItem onClick={handleMenuClose} key='1'>
@@ -79,32 +72,32 @@ const MobileMenu: React.FC<IMobileProps> = ({
 				</Link>
 			</MenuItem>
 			{user?.role === 'instructor' ? (
-				<MenuItem>
+				<MenuItem key='4'>
 					<Link href='/instructor/course/create' passHref>
 						<Button
 							size='small'
 							color='secondary'
-							sx={navItemStyle}
+							startIcon={<DashboardCustomize fontSize='small' />}
 						>
 							Create Course
 						</Button>
 					</Link>
 				</MenuItem>
 			) : (
-				<MenuItem>
+				<MenuItem key='5'>
 					<Link href='/user/become-instructor' passHref>
 						<Button
 							size='small'
 							color='secondary'
-							sx={navItemStyle}
+							startIcon={<DashboardCustomize fontSize='small' />}
 						>
-							Become Instructor
+							Be an Instructor
 						</Button>
 					</Link>
 				</MenuItem>
 			)}
 			{user && [
-				<MenuItem key='4'>
+				<MenuItem key='6'>
 					<Link href='/user' passHref>
 						<Button
 							size='small'
@@ -115,7 +108,7 @@ const MobileMenu: React.FC<IMobileProps> = ({
 						</Button>
 					</Link>
 				</MenuItem>,
-				<MenuItem onClick={handleLogout} key='5'>
+				<MenuItem onClick={handleLogout} key='7'>
 					<Button
 						size='small'
 						color='secondary'

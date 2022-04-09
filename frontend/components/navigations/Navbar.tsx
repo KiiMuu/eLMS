@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
 							color='secondary'
 							sx={navItemStyle}
 						>
-							Become Instructor
+							Be an Instructor
 						</Button>
 					</Link>
 				</MenuItem>
@@ -145,18 +145,20 @@ const Navbar: React.FC = () => {
 			<HideOnscroll>
 				<AppBar position='fixed' color='transparent'>
 					<Toolbar>
-						<IconButton
-							size='large'
-							edge='start'
-							color='inherit'
-							aria-label='menu'
-							sx={{
-								display: { sm: 'none' },
-							}}
-							onClick={drawerToggle}
-						>
-							<Menu />
-						</IconButton>
+						{router.pathname === '/user' && (
+							<IconButton
+								size='large'
+								edge='start'
+								color='inherit'
+								aria-label='menu'
+								sx={{
+									display: { md: 'none' },
+								}}
+								onClick={drawerToggle}
+							>
+								<Menu />
+							</IconButton>
+						)}
 						<Link href='/' passHref>
 							<Button
 								size='large'

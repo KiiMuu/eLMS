@@ -35,7 +35,7 @@ let lightTheme = createTheme({
 				root: {
 					background: '#fff',
 					boxShadow: '1px 2px 3px rgb(0 0 0 / 11%)',
-					zIndex: 99999,
+					zIndex: 99997,
 				},
 			},
 		},

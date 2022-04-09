@@ -21,7 +21,7 @@ const AppDrawer: FC<ReactNode> = ({ children }) => {
 					keepMounted: true,
 				}}
 				sx={{
-					display: { xs: 'block', sm: 'none' },
+					display: { xs: 'block', md: 'none', zIndex: 99998 },
 					'& .MuiDrawer-paper': {
 						boxSizing: 'border-box',
 						width: 240,
@@ -33,7 +33,7 @@ const AppDrawer: FC<ReactNode> = ({ children }) => {
 			<Drawer
 				variant='permanent'
 				sx={{
-					display: { xs: 'none', sm: 'block' },
+					display: { xs: 'none', md: 'block', zIndex: 99998 },
 					'& .MuiDrawer-paper': {
 						boxSizing: 'border-box',
 						width: 240,

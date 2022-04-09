@@ -1,31 +1,52 @@
 import Link from 'next/link';
 import AppDrawer from 'components/layout/AppDrawer';
+import { UserNavItems } from 'styles/user';
+import { Theme, useMediaQuery } from '@mui/material';
 import {
-	List,
-	ListItem,
-	ListItemIcon,
-	ListItemText,
-	Toolbar,
-} from '@mui/material';
-import { DashboardCustomizeRounded } from '@mui/icons-material';
+	DashboardCustomizeRounded,
+	DashboardCustomizeTwoTone,
+} from '@mui/icons-material';
+import { orange, teal } from '@mui/material/colors';
 
 const UserNavigation: React.FC = () => {
+	let arrOfItems = [
+		{
+			flag: 'Dashboard',
+			to: '/user/dashboard',
+			icon: (
+				<DashboardCustomizeRounded
+					fontSize='small'
+					htmlColor={teal[500]}
+				/>
+			),
+		},
+		{
+			flag: 'Dashboard1',
+			to: '/user/dashboard1',
+			icon: (
+				<DashboardCustomizeTwoTone
+					fontSize='small'
+					htmlColor={orange[500]}
+				/>
+			),
+		},
+	];
+
+	const md = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'));
+
 	const drawerContent = (
-		<>
-			<Toolbar />
-			<List>
-				<Link href='/user/dashboard' passHref>
-					<a style={{ textDecoration: 'none', color: 'inherit' }}>
-						<ListItem button key='1'>
-							<ListItemIcon>
-								<DashboardCustomizeRounded color='primary' />
-							</ListItemIcon>
-							<ListItemText primary='Dashboard' />
-						</ListItem>
-					</a>
-				</Link>
-			</List>
-		</>
+		<UserNavItems style={{ marginTop: md ? 70 : 15 }}>
+			{arrOfItems.map((item, i) => (
+				<li className='navItem' key={i}>
+					<Link href={item.to} passHref>
+						<a>
+							{item.icon}
+							{item.flag}
+						</a>
+					</Link>
+				</li>
+			))}
+		</UserNavItems>
 	);
 
 	return <AppDrawer>{drawerContent}</AppDrawer>;

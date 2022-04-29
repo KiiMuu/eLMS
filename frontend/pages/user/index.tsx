@@ -8,7 +8,7 @@ import UserLayout from 'components/layout/UserLayout';
 import Spin from 'components/layout/Spin';
 import { Box } from '@mui/material';
 
-const UserIndex: NextPage = () => {
+const UserPage: NextPage = () => {
 	const dispatch = useAppDispatch();
 	const { currentUserStatus, user } = useAppSelector(state => state.auth);
 
@@ -35,4 +35,4 @@ const UserIndex: NextPage = () => {
 	);
 };
 
-export default UserIndex;
+export default UserPage;

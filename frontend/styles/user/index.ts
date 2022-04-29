@@ -1,5 +1,5 @@
 import { styled } from '@stitches/react';
-import { orange, teal } from '@mui/material/colors';
+import { orange, teal, blue } from '@mui/material/colors';
 
 export const UserLayoutStyle = styled('section', {
 	display: 'flex',
@@ -19,8 +19,9 @@ export const UserNavItems = styled('ul', {
 		textDecoration: 'none',
 		textTransform: 'uppercase',
 		transition: '.16s ease-in-out',
+		opacity: 0.75,
 		'&:hover': {
-			opacity: 0.75,
+			opacity: 1,
 		},
 	},
 	'& .navItem': {
@@ -32,6 +33,10 @@ export const UserNavItems = styled('ul', {
 		'&:nth-of-type(2)': {
 			background: orange[50],
 			color: orange[500],
+		},
+		'&:nth-of-type(3)': {
+			background: blue[50],
+			color: blue[500],
 		},
 		'&:not(:last-of-type)': {
 			marginBottom: '8px',

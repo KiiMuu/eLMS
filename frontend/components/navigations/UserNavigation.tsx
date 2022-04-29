@@ -6,7 +6,7 @@ import {
 	DashboardCustomizeRounded,
 	DashboardCustomizeTwoTone,
 } from '@mui/icons-material';
-import { orange, teal } from '@mui/material/colors';
+import { orange, teal, blue } from '@mui/material/colors';
 
 const UserNavigation: React.FC = () => {
 	let arrOfItems = [
@@ -27,6 +27,16 @@ const UserNavigation: React.FC = () => {
 				<DashboardCustomizeTwoTone
 					fontSize='small'
 					htmlColor={orange[500]}
+				/>
+			),
+		},
+		{
+			flag: 'Dashboard2',
+			to: '/user/dashboard2',
+			icon: (
+				<DashboardCustomizeTwoTone
+					fontSize='small'
+					htmlColor={blue[500]}
 				/>
 			),
 		},

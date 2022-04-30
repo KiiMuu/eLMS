@@ -37,11 +37,7 @@ export const authSlice = createSlice({
 		resetPasswordStatus: 'idle',
 		resetPasswordMsg: '',
 	},
-	reducers: {
-		// onSignOut: state => {
-		// 	state.user = null;
-		// },
-	},
+	reducers: {},
 	extraReducers(builder) {
 		builder
 			.addCase(signup.pending, (state, action) => {

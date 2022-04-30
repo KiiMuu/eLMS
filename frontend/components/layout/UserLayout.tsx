@@ -1,9 +1,13 @@
 import { FC, ReactNode } from 'react';
+import { useAppSelector } from 'state/hooks';
 import UserNavigation from 'components/navigations/UserNavigation';
+import InstructorNavigation from 'components/navigations/InstructorNavigation';
 import { Box } from '@mui/system';
 import { UserLayoutStyle } from 'styles/user';
 
 const UserLayout: FC<ReactNode> = ({ children }) => {
+	const { user } = useAppSelector(state => state.auth);
+
 	return (
 		<UserLayoutStyle>
 			<Box
@@ -15,7 +19,11 @@ const UserLayout: FC<ReactNode> = ({ children }) => {
 				}}
 				aria-label='user sider'
 			>
-				<UserNavigation />
+				{user?.role === 'instructor' ? (
+					<InstructorNavigation />
+				) : (
+					<UserNavigation />
+				)}
 			</Box>
 			<Box
 				component='main'

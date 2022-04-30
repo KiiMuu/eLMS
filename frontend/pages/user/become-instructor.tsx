@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useAppSelector, useAppDispatch } from 'state/hooks';
@@ -15,12 +16,16 @@ const BecomeInstructor: NextPage = () => {
 	const becomeIns = async () => {
 		try {
 			await dispatch(becomeAnInstructor());
-
-			window.location.href = accountLinkUrl;
 		} catch (error) {
 			console.log(error);
 		}
 	};
+
+	useEffect(() => {
+		if (becomeInstructorStatus === 'succeeded') {
+			window.location.href = accountLinkUrl;
+		}
+	}, [becomeInstructorStatus, accountLinkUrl]);
 
 	return (
 		<>

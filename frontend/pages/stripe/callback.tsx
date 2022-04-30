@@ -9,16 +9,31 @@ import { Box } from '@mui/material';
 
 const StripeCallback: NextPage = () => {
 	const dispatch = useAppDispatch();
-	const { user } = useAppSelector(state => state.auth);
-	const { account } = useAppSelector(state => state.user);
+	let { user } = useAppSelector(state => state.auth);
+	let { instructorAccount, accountStatus } = useAppSelector(
+		state => state.user
+	);
 
 	useEffect(() => {
 		if (user) {
 			dispatch(getAccountStatus());
+		}
+	}, [dispatch, user]);
+
+	useEffect(() => {
+		if (accountStatus === 'succeeded') {
+			dispatch({
+				type: 'auth/current',
+				payload: instructorAccount,
+			});
+			window.localStorage.setItem(
+				'elmsUser',
+				JSON.stringify(instructorAccount)
+			);
 
 			window.location.href = '/instructor';
 		}
-	}, [dispatch, user]);
+	}, [dispatch, accountStatus]);
 
 	return (
 		<UserRoute>

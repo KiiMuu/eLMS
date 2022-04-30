@@ -95,6 +95,19 @@ const Navbar: React.FC = () => {
 					</Link>
 				</MenuItem>
 			)}
+			{user?.role === 'instructor' && (
+				<MenuItem>
+					<Link href='/instructor' passHref>
+						<Button
+							size='small'
+							color='secondary'
+							sx={navItemStyle}
+						>
+							Instructor
+						</Button>
+					</Link>
+				</MenuItem>
+			)}
 			{!user && [
 				<MenuItem key='1'>
 					<Link href='/signup' passHref>

@@ -1,10 +1,15 @@
 import { Router } from 'express';
-import { becomeInstructor, getAccountStatus } from '../controllers/instructor';
+import {
+	becomeInstructor,
+	getAccountStatus,
+	getCurrentInstructor,
+} from '../controllers/instructor';
 import { requireSignin } from '../middleware';
 
 let router: Router = Router();
 
-router.post('/user/become-instructor', requireSignin, becomeInstructor);
-router.get('/user/account-status', requireSignin, getAccountStatus);
+router.post('/instructor/become-instructor', requireSignin, becomeInstructor);
+router.get('/instructor/account-status', requireSignin, getAccountStatus);
+router.get('/instructor/current', requireSignin, getCurrentInstructor);
 
 export default router;

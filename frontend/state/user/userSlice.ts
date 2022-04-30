@@ -6,7 +6,7 @@ export const userSlice = createSlice({
 	initialState: {
 		becomeInstructorStatus: 'idle',
 		accountStatus: 'idle',
-		account: {},
+		instructorAccount: {},
 		accountLinkUrl: '',
 	},
 	reducers: {},
@@ -27,7 +27,7 @@ export const userSlice = createSlice({
 			})
 			.addCase(getAccountStatus.fulfilled, (state, action) => {
 				state.accountStatus = 'succeeded';
-				state.account = action.payload;
+				state.instructorAccount = action.payload;
 			})
 			.addCase(getAccountStatus.rejected, (state, action) => {
 				state.accountStatus = 'failed';

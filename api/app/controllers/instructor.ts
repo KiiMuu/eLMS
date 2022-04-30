@@ -73,4 +73,25 @@ const getAccountStatus = async (
 	}
 };
 
-export { becomeInstructor, getAccountStatus };
+const getCurrentInstructor = async (
+	req: any,
+	res: Response
+): Promise<object | void> => {
+	try {
+		const user = await User.findById(req.user?._id)
+			.select('-password')
+			.exec();
+
+		if (user?.role !== 'instructor') {
+			return res.sendStatus(403);
+		}
+
+		return res.json({ ok: true });
+	} catch (error: any) {
+		return res.status(400).json({
+			msg: error.message,
+		});
+	}
+};
+
+export { becomeInstructor, getAccountStatus, getCurrentInstructor };
